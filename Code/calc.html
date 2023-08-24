@@ -1,0 +1,200 @@
+<html>
+
+<head>
+    <title>REST API Calculator</title>
+    <style>
+        /* set body background color and center everything */
+        body {
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* center the container */
+        .container {
+            margin: 0 auto;
+            max-width: 800px;
+        }
+
+        /* style the header */
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* style the navigation menu */
+        .nav {
+            background-color: #ddd;
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+        }
+
+        .nav a {
+            color: #333;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        .nav a:hover {
+            color: #fff;
+            background-color: #333;
+        }
+
+        /* style the main content */
+        .main {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .card {
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+            padding: 20px;
+            width: calc(33.33% - 20px);
+        }
+
+        .card img {
+            width: 100%;
+        }
+
+        .card h2 {
+            margin: 0 0 10px;
+        }
+
+        .card p {
+            margin: 0;
+        }
+    </style>
+    <script>
+
+        var RESTAPIURL = 'https://jc0ps6oktk.execute-api.us-west-1.amazonaws.com/prod';
+
+        function calcAverage() {
+            // Read input values
+            var a = document.getElementById("a").value;
+            var b = document.getElementById("b").value;
+            var c = document.getElementById("c").value;
+
+            // Fetch data from API
+            fetch(RESTAPIURL + '/calc_average?a=' + a + '&b=' + b + '&c=' + c)
+
+                // Convert response string to json object
+                .then(response => response.json())
+                .then(response => {
+                    // Display result
+                    document.getElementById("average_result").textContent = JSON.parse(response.body).result;
+                })
+                .catch(err => {
+                    // Handle errors
+                    console.log(err);
+                });
+        }
+
+        function calcMiddle() {
+            // Read input values
+            var a = document.getElementById("a").value;
+            var b = document.getElementById("b").value;
+            var c = document.getElementById("c").value;
+
+            // Fetch data from API
+            fetch(RESTAPIURL + '/calc_middle?a=' + a + '&b=' + b + '&c=' + c)
+
+                // Convert response string to json object
+                .then(response => response.json())
+                .then(response => {
+
+                    // Display result
+                    document.getElementById("middle_result").textContent = JSON.parse(response.body).result;
+                })
+                .catch(err => {
+                    // Handle errors
+                    console.log(err);
+                });
+        }
+
+        function calcPower() {
+            // Read input values
+            var a = document.getElementById("a").value;
+            var b = document.getElementById("b").value;
+
+            // Fetch data from API
+            fetch(RESTAPIURL + '/calc_power?a=' + a + '&b=' + b)
+
+                // Convert response string to json object
+                .then(response => response.json())
+                .then(response => {
+
+                    // Display result
+                    document.getElementById("power_result").textContent = JSON.parse(response.body).result;
+                })
+                .catch(err => {
+                    // Handle errors
+                    console.log(err);
+                });
+        }
+
+        function calcSquareRoot() {
+            // Read input values
+            var a = document.getElementById("a").value;
+            var b = document.getElementById("b").value;
+
+            // Fetch data from API
+            fetch(RESTAPIURL + '/calc_sqr?a=' + a + '&b=' + b)
+
+                // Convert response string to json object
+                .then(response => response.json())
+                .then(response => {
+
+                    // Display result
+                    document.getElementById("square_root_result").textContent = JSON.parse(response.body).result;
+                })
+                .catch(err => {
+                    // Handle errors
+                    console.log(err);
+                });
+        }
+
+    </script>
+</head>
+
+<body>
+    <div class="calculator">
+        <h1>Calculator</h1>
+        <form>
+            <label for="a">A:</label>
+            <input type="text" id="a"><br>
+            <label for="b">B:</label>
+            <input type="text" id="b"><br>
+            <label for="c">C:</label>
+            <input type="text" id="c"><br><br>
+
+            <p>Calculate Average:<br>
+                Result: <span id="average_result"> </span><br>
+                <button type="button" onclick="calcAverage()">Calculate</button>
+            </p>
+
+            <p>Calculate Middle:<br>
+                Result: <span id="middle_result"> </span><br>
+                <button type="button" onclick="calcMiddle()">Calculate</button>
+            </p>
+
+            <p>Calculate Power:<br>
+                Result: <span id="power_result"> </span><br>
+                <button type="button" onclick="calcPower()">Calculate</button>
+            </p>
+
+            <p>Calculate Square Root:<br>
+                Result: <span id="square_root_result"> </span><br>
+                <button type="button" onclick="calcSquareRoot()">Calculate</button>
+            </p>
+        </form>
+    </div>
+</body>
+
+</html>

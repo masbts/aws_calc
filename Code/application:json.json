@@ -1,0 +1,9 @@
+{
+    "a": "$input.params('a')",
+    "b": "$input.params('b')",
+    "c": "$input.params('c')"
+}
+
+application/json
+
+https: //jc0ps6oktk.execute-api.us-west-1.amazonaws.com/prod/calc_average?a=2&b=4&c=6
